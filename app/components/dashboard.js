@@ -1,5 +1,7 @@
 import React from 'react-native'
 import Profile from './profile'
+import Repositories from './repositories'
+import api from '../api/github'
 const { Text, View, Component, StyleSheet, Image, TouchableHighlight } = React
 
 export default class Dashboard extends Component {
@@ -24,16 +26,24 @@ export default class Dashboard extends Component {
 
   goToProfile = () => {
     const { userInfo } = this.props
-    console.log('got to profile')
     this.props.navigator.push({
-      title: userInfo.name || 'Select an Option',
+      title: userInfo.name || 'Profile',
       component: Profile,
       passProps: { userInfo }
     })
   };
 
   goToRepo = () => {
-    console.log('got to repo')
+    const { userInfo } = this.props
+    api.getRepos(userInfo.login)
+      .then(res => {
+        console.log('resss ', res)
+        this.props.navigator.push({
+          title: userInfo.name || 'Profile Page',
+          component: Repositories,
+          passProps: { userInfo, repos: res }
+        })
+      })
   };
 
   goToNotes = () => {
