@@ -1,15 +1,14 @@
 import React from 'react-native'
-const { View, Text, StyleSheet, TextInput, TouchableHighlight, ActivityIndicatorIOS, } = React;
+const { Image, View, Text, StyleSheet, TextInput, TouchableHighlight, ActivityIndicatorIOS, } = React;
 import api from '../api/github'
 import Dashboard from './dashboard'
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     padding: 30,
-    marginTop: 65,
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: '#75ff55',
+    backgroundColor: '#b24141',
   },
   title: {
     marginBottom: 20,
@@ -43,6 +42,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignSelf: 'stretch',
     justifyContent: 'center'
+  },
+  image: {
+    alignSelf: 'center'
+  },
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
   }
 })
 
@@ -92,10 +98,12 @@ class Main extends React.Component {
 
   render() {
     const showErr = (
-      this.state.error ? <Text>{ this.state.error} </Text> : <View></View>
+      this.state.error ? <Text style={styles.errorText}>{ this.state.error} </Text> : <View></View>
     )
     return (
       <View style={styles.mainContainer}>
+        <Image style={styles.image}
+               source={require('../../public/images/aurity_logo_v32_small.png')}></Image>
         <Text style={styles.title}> Search for a Github User</Text>
         <TextInput style={styles.searchInput}
                    value={this.state.username}

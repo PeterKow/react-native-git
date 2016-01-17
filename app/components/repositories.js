@@ -1,6 +1,7 @@
 import React, { Component, ScrollView, Text, View, TouchableHighlight, StyleSheet } from 'react-native'
 import Badge from './badge'
 import Separator from './utils/separator'
+import Web_view from  './utils/webView'
 
 const styles = StyleSheet.create({
   container: {
@@ -29,7 +30,11 @@ const styles = StyleSheet.create({
 
 export default class Repositories extends Component {
   openPage = (url) => {
-    console.log('go to repor', url)
+    this.props.navigator.push({
+      component: Web_view,
+      title: 'Web View',
+      passProps: { url }
+    })
   };
 
   render() {
@@ -40,7 +45,7 @@ export default class Repositories extends Component {
         <View key={index}>
           <View style={styles.rowContainer}>
             <TouchableHighlight
-            onPress={this.openPage(item.html_url)}
+            onPress={() => this.openPage(item.html_url)}
             underlayColor='transparent'>
               <Text style={styles.name}>{item.name}</Text>
             </TouchableHighlight>

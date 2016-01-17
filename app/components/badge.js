@@ -6,7 +6,7 @@ export default class Badge extends Component {
     const { userInfo } = this.props
     return (
       <View style={styles.container}>
-        <Image style={styles.image} source={{ uri: userInfo.avatart_url }}/>
+        <Image style={styles.image} source={{ uri: userInfo.avatar_url }}/>
         <Text style={styles.name}>{userInfo.name}</Text>
         <Text style={styles.handle}>{userInfo.login}</Text>
 

@@ -53,7 +53,6 @@ export default class Dashboard extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Git profile</Text>
         <Image source={{ uri: this.props.userInfo.avatar_url}} style={styles.image}/>
         <TouchableHighlight
           style={this.makeBackground(0)}
@@ -67,12 +66,7 @@ export default class Dashboard extends Component {
           underlayColor='#88D4F5'>
           <Text style={styles.buttonText}>View repo</Text>
         </TouchableHighlight>
-        <TouchableHighlight
-          style={this.makeBackground(2)}
-          onPress={this.goToNotes}
-          underlayColor='#88D4F5'>
-          <Text style={styles.buttonText}>View notes</Text>
-        </TouchableHighlight>
+
       </View>
     )
   }
@@ -92,3 +86,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   }
 })
+
+//  <TouchableHighlight
+//style={this.makeBackground(2)}
+//onPress={this.goToNotes}
+//underlayColor='#88D4F5'>
+//  <Text style={styles.buttonText}>View notes</Text>
+//</TouchableHighlight>
