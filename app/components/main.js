@@ -1,5 +1,7 @@
 import React from 'react-native'
-const { View, Text, StyleSheet} = React;
+const { View, Text, StyleSheet, TextInput, TouchableHighlight } = React;
+import api from '../api/github'
+import Dashboard from './dashboard'
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
@@ -7,7 +9,7 @@ const styles = StyleSheet.create({
     marginTop: 65,
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: '#48BBEC',
+    backgroundColor: '#75ff55',
   },
   title: {
     marginBottom: 20,
@@ -44,11 +46,64 @@ const styles = StyleSheet.create({
   }
 })
 
+
 class Main extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: '',
+      isLoading: false,
+      error: false,
+    }
+  }
+
+  handleChange(event) {
+    this.setState({
+      username: event.nativeEvent.text
+    })
+  }
+
+  handleSubmit() {
+    this.setState({
+      isLoading: true,
+    })
+    api.getBio(this.state.username)
+    .then(res => {
+      console.log('res.message', res)
+      if(res.message === 'Not Found'){
+        this.setState({
+          error: 'User not found',
+          isLoading: false
+        })
+      } else {
+        this.props.navigator.push({
+          title: res.name || 'Select an Option',
+          component: Dashboard,
+          passProps: { userInfo: res}
+        })
+        this.setState({
+          isLoading: false,
+          error: false,
+          username: ''
+        })
+      }
+    })
+    console.log('Submit', this.state.username)
+  }
+
   render() {
     return (
       <View style={styles.mainContainer}>
-        <Text>Hello yo</Text>
+        <Text style={styles.title}> Search for a Github User</Text>
+        <TextInput style={styles.searchInput}
+                   value={this.state.username}
+                   onChange={this.handleChange.bind(this)} />
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.handleSubmit.bind(this)}
+          underlayColor="white">
+          <Text style={styles.buttonText}> SEARCH </Text>
+        </TouchableHighlight>
       </View>
     )
   }
