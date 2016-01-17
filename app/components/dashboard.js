@@ -1,12 +1,68 @@
 import React from 'react-native'
-const { Text, View, Component, StyleSheet } = React
+import Profile from './profile'
+const { Text, View, Component, StyleSheet, Image, TouchableHighlight } = React
 
 export default class Dashboard extends Component {
+  makeBackground(btn){
+    var obj = {
+      flexDirection: 'row',
+      alignSelf: 'stretch',
+      justifyContent: 'center',
+      flex: 1
+    }
+
+    if(btn === 0){
+      obj.backgroundColor = '#48BBEC'
+    } else if (btn === 1) {
+      obj.backgroundColor = '#E77AAE'
+    } else {
+      obj.backgroundColor = '#75bBF4'
+    }
+
+    return obj
+  }
+
+  goToProfile = () => {
+    const { userInfo } = this.props
+    console.log('got to profile')
+    this.props.navigator.push({
+      title: userInfo.name || 'Select an Option',
+      component: Profile,
+      passProps: { userInfo }
+    })
+  };
+
+  goToRepo = () => {
+    console.log('got to repo')
+  };
+
+  goToNotes = () => {
+    console.log('got to notes')
+  };
+
   render() {
-    console.log('ddd', this.props.userInfo)
     return (
       <View style={styles.container}>
-        <Text>This is dashboard</Text>
+        <Text>Git profile</Text>
+        <Image source={{ uri: this.props.userInfo.avatar_url}} style={styles.image}/>
+        <TouchableHighlight
+          style={this.makeBackground(0)}
+          onPress={this.goToProfile}
+          underlayColor='#88D4F5'>
+          <Text style={styles.buttonText}>View profile</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={this.makeBackground(1)}
+          onPress={this.goToRepo}
+          underlayColor='#88D4F5'>
+          <Text style={styles.buttonText}>View repo</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={this.makeBackground(2)}
+          onPress={this.goToNotes}
+          underlayColor='#88D4F5'>
+          <Text style={styles.buttonText}>View notes</Text>
+        </TouchableHighlight>
       </View>
     )
   }

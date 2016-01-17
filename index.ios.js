@@ -27,7 +27,7 @@ var githubExample = React.createClass({
       <NavigatorIOS
         style={ styles.container}
         initialRoute={{
-        title: 'Github main',
+        title: 'Github',
         component: Main
         }}/>
     );

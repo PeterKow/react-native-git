@@ -1,5 +1,5 @@
 import React from 'react-native'
-const { View, Text, StyleSheet, TextInput, TouchableHighlight } = React;
+const { View, Text, StyleSheet, TextInput, TouchableHighlight, ActivityIndicatorIOS, } = React;
 import api from '../api/github'
 import Dashboard from './dashboard'
 const styles = StyleSheet.create({
@@ -69,7 +69,6 @@ class Main extends React.Component {
     })
     api.getBio(this.state.username)
     .then(res => {
-      console.log('res.message', res)
       if(res.message === 'Not Found'){
         this.setState({
           error: 'User not found',
@@ -92,6 +91,9 @@ class Main extends React.Component {
   }
 
   render() {
+    const showErr = (
+      this.state.error ? <Text>{ this.state.error} </Text> : <View></View>
+    )
     return (
       <View style={styles.mainContainer}>
         <Text style={styles.title}> Search for a Github User</Text>
@@ -104,6 +106,11 @@ class Main extends React.Component {
           underlayColor="white">
           <Text style={styles.buttonText}> SEARCH </Text>
         </TouchableHighlight>
+        <ActivityIndicatorIOS
+          animating={this.state.isLoading}
+          color='#111'
+          size="large"/>
+        { showErr }
       </View>
     )
   }
