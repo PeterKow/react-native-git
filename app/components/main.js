@@ -103,8 +103,6 @@ class Main extends React.Component {
     )
     return (
       <View style={styles.mainContainer}>
-        <Image style={styles.image}
-               source={require('../../public/images/aurity_logo_v32_small.png')}></Image>
         <Text style={styles.title}> Search for a Github User</Text>
         <TextInput style={styles.searchInput}
                    value={this.state.username}
@@ -126,3 +124,6 @@ class Main extends React.Component {
 }
 
 export default Main
+
+//<Image style={styles.image}
+//source={require('../../public/images/aurity_logo_v32_small.png')}></Image>
