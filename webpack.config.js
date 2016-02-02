@@ -34,6 +34,12 @@ var config = {
       },
     }]
   },
+  resolve: {
+    alias: {
+      'components': __dirname + '/app/components',
+    },
+    extensions: ['', '.svg', '.js', '.jsx'],
+  },
 
   plugins: [],
 

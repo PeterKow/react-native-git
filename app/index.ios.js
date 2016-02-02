@@ -12,7 +12,7 @@ var {
   NavigatorIOS,
   View,
 } = React;
-import Main from './components/main'
+import Main from 'components/main'
 
 var styles = StyleSheet.create({
   container: {

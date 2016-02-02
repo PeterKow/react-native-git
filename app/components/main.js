@@ -104,6 +104,8 @@ class Main extends React.Component {
     return (
       <View style={styles.mainContainer}>
         <Text style={styles.title}> Search for a Github User</Text>
+        <Image style={styles.image}
+               source={require('../../public/images/aurity_logo_v32_small.png')}></Image>
         <TextInput style={styles.searchInput}
                    value={this.state.username}
                    onChange={this.handleChange.bind(this)} />
