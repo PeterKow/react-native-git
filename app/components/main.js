@@ -70,6 +70,7 @@ class Main extends React.Component {
   }
 
   handleSubmit() {
+    console.log('helo!!', this.state.username)
     this.setState({
       isLoading: true,
     })
