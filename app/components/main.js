@@ -1,6 +1,6 @@
 import React from 'react-native'
 const { Image, View, Text, StyleSheet, TextInput, TouchableHighlight, ActivityIndicatorIOS, } = React;
-import api from '../api/github'
+import api from 'api/github'
 import Dashboard from './dashboard'
 const styles = StyleSheet.create({
   mainContainer: {
@@ -103,9 +103,7 @@ class Main extends React.Component {
     )
     return (
       <View style={styles.mainContainer}>
-        <Text style={styles.title}> Search for a Github User</Text>
-        <Image style={styles.image}
-               source={require('../../public/images/aurity_logo_v32_small.png')}></Image>
+        <Text style={styles.title}> Search for a Github Useesss</Text>
         <TextInput style={styles.searchInput}
                    value={this.state.username}
                    onChange={this.handleChange.bind(this)} />

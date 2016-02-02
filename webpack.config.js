@@ -25,18 +25,34 @@ var config = {
       test: /\.js$/,
       include: [
         path.resolve(__dirname, 'app'),
-        //path.resolve(__dirname, 'node_modules/react-native/Libraries/react-native'),
-        //path.resolve(__dirname, 'node_modules/react-native-navbar'),
+        path.resolve(__dirname, 'node_modules/react-native/Libraries/react-native'),
+        path.resolve(__dirname, 'node_modules/react-native-navbar'),
       ],
       loader: 'babel-loader',
       query: {
         presets: ['es2015', 'stage-0','react'],
+        plugins: [],
+        //env: {
+        //  "development": {
+        //    "plugins": [
+        //      ["react-transform", {
+        //        "transforms": [{
+        //          "transform": "react-transform-hmr",
+        //          "imports": ["react-native"],
+        //          "locals": ["module"]
+        //        }]
+        //      }]
+        //    ]
+        //  }
+        //}
       },
+
     }]
   },
   resolve: {
     alias: {
       'components': __dirname + '/app/components',
+      'api': __dirname + '/app/api',
     },
     extensions: ['', '.svg', '.js', '.jsx'],
   },
@@ -44,5 +60,23 @@ var config = {
   plugins: [],
 
 };
+
+// Hot loader
+//if (process.env.HOT) {
+//  config.devtool = 'eval'; // Speed up incremental builds
+//  config.entry['index.ios'].unshift('react-native-webpack-server/hot/entry');
+//  config.entry['index.ios'].unshift('webpack/hot/only-dev-server');
+//  config.entry['index.ios'].unshift('webpack-dev-server/client?http://localhost:8082');
+//  config.output.publicPath = 'http://localhost:8082/';
+//  config.plugins.unshift(new webpack.HotModuleReplacementPlugin());
+//  config.module.loaders[0].query.plugins.push('react-transform');
+//  config.module.loaders[0].query = {
+//    'react-transform': [{
+//      target: 'react-transform-hmr',
+//      imports: ['react-native'],
+//      locals: ['module']
+//    }]
+//  };
+//}
 
 module.exports = config;
